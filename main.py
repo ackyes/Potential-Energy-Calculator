@@ -1,14 +1,5 @@
 import PySimpleGUI as sg
-"""
-Mass = float(input("The mass: "))
-Acceleration = float(input("The gravitational acceleration: "))
-Height = float(input("The height: "))
-
-Potential_Energy = Mass * Acceleration * Height
-
-print("Potential Energy: " + str(Potential_Energy))
-"""
-
+import controller
 sg.theme('DarkTeal')
 
 layout = [
@@ -21,13 +12,14 @@ layout = [
     [
         sg.Text("Mass: "),
         sg.Input(size=(3, 1), key='-MASS-'),
-        sg.Text("kg."),
+        sg.Text("kg.")
+    ],
+    [        
         sg.Text("Acceleration: "),
         sg.Input(size=(3, 1), key='-ACCELERATION-'),
-        sg.Text("g.")
-    ],
+        sg.Text("g.")],
     [sg.Text("Height: "),
-     sg.Input(size=(3, 1), key='-FT-'),
+     sg.Input(size=(3, 1), key='-HEIGHT-'),
      sg.Text("ft.")],
     [sg.Button('Calculate'), sg.Button('Exit')],
     [sg.Text("Results: "),
@@ -38,8 +30,23 @@ window = sg.Window('Potential Energy Calculator', layout)
 
 while True:  #Event Loop
     event, values = window.read()
-    if event == sg.WIN_CLOSED or event == 'Cancel':  # if user closes window or clicks cancel
+    print(event, values)
+    if event == sg.WIN_CLOSED or event == 'Exit':  
         break
-    print('Potential Energy:', values[0])
+    if event == 'Calculate':
+      # Update output text element to be value of input element
+      # get kilograms, gravity, and feet
+      kilograms = values['-MASS-']
+      gravity = values['-ACCELERATION-']
+      feet = values['-HEIGHT-']
+
+      # Calculates the potential energy
+      results = controller.get_results(kilograms, gravity, feet)
+
+      # Output results
+      window['-OUTPUT-'].update(results)
+  
+
+print('Potential Energy:', values[0])
 
 window.close()
