@@ -10,18 +10,25 @@ layout = [
             size=(40, 3))
     ],
     [
+      # Line for Mass
         sg.Text("Mass: "),
         sg.Input(size=(3, 1), key='-MASS-'),
         sg.Text("kg.")
     ],
-    [        
+    [
+      # Line for Gravity Acceleration
         sg.Text("Acceleration: "),
         sg.Input(size=(3, 1), key='-ACCELERATION-'),
         sg.Text("g.")],
-    [sg.Text("Height: "),
+    [
+      # Line for Height
+     sg.Text("Height: "),
      sg.Input(size=(3, 1), key='-HEIGHT-'),
-     sg.Text("ft.")],
+     sg.Text("ft.")
+    ],
+    # Buttons for calculations, and exiting program
     [sg.Button('Calculate'), sg.Button('Exit')],
+    # Lines for the Potential Energy
     [sg.Text("Results: "),
      sg.Text("", size=(25, 4), key='-OUTPUT-')],
 ]
@@ -40,7 +47,7 @@ while True:  #Event Loop
       gravity = values['-ACCELERATION-']
       feet = values['-HEIGHT-']
 
-      # Calculates the potential energy
+      # Calculates the potential energy by calling on controller
       results = controller.get_results(kilograms, gravity, feet)
 
       # Output results
