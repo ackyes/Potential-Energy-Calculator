@@ -47,6 +47,6 @@ while True:  #Event Loop
       window['-OUTPUT-'].update(results)
   
 
-print('Potential Energy:', values[0])
+
 
 window.close()
